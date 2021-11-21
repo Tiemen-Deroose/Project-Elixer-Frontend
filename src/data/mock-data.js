@@ -31,7 +31,7 @@ const JEWELRY_DATA = [
     },
     { 
         id: '111b85dc-e7e4-473a-9952-06183f5f97cc',
-        name: 'Skeletonized petals bracelet',
+        name: 'Skeletonized Petals bracelet',
         category: 'bracelet',
         material: 'sterling silver',
         colour: 'silver',
