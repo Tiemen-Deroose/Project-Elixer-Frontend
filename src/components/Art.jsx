@@ -7,8 +7,10 @@ const Art = ({ id, title, material, medium, size, image_url, price, isFavourited
                 <p className="text-xl font-bold m-3">
                     <span className="bg-green-100 px-2 py-1 border-2 rounded-lg border-green-500">{title}</span>
                 </p>
-                <FavouriteButton state={isFavourited} onFavourite={() => onFavourite(id)} />
-                <img className="border-t-2 border-b-2 border-black" alt={title} src={image_url} />
+                <div className="container">
+                    <i><FavouriteButton state={isFavourited} onFavourite={() => onFavourite(id)} /></i>
+                    <img className="border-t-2 border-b-2 border-black" alt={title} src={image_url} />
+                </div>
             </div>
             <div className="m-2">
                 <p>{size} {material} painting made with {medium}</p>
