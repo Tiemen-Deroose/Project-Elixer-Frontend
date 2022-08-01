@@ -27,7 +27,7 @@ const JEWELRY_DATA = [
         material: 'steel',
         colour: 'silver',
         image_url: 'http://localhost:9000/api/jewelry/images/colour_changing_pendant.jpg',
-        price: 49.99
+        price: 49.99,
     },
     { 
         id: '111b85dc-e7e4-473a-9952-06183f5f97cc',
@@ -36,7 +36,7 @@ const JEWELRY_DATA = [
         material: 'sterling silver',
         colour: 'silver',
         image_url: 'http://localhost:9000/api/jewelry/images/skeletonized_petals_bracelet.jpg',
-        price: 39.99
+        price: 39.99,
     }
 ];
 
