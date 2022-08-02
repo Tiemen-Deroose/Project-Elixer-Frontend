@@ -1,36 +1,37 @@
 import { TextField, Button, Autocomplete, InputAdornment } from "@mui/material"
 import { useState } from "react";
 
-export default function AddArtForm({ onSubmitArt = (f) => f }) {
+export default function AddJewelryForm({ onSubmitJewelry = (f) => f }) {
     const options = {
+        category: [
+            { label: 'pendant' },
+            { label: 'bracelet' },
+        ],
         material: [
-            { label: 'canvas' },
+            { label: 'steel' },
+            { label: 'sterling silver' },
+            { label: 'gold' },
         ],
-        medium: [
-            { label: 'acrylic paint' },
-            { label: 'resin' },
-        ],
-        size: [
-            { label: 'small' },
-            { label: 'medium' },
-            { label: 'large' },
+        colour: [
+            { label: 'silver' },
+            { label: 'gold' },
         ]
     };
 
-    const [title, setTitle] = useState('');
+    const [name, setName] = useState('');
+    const [category, setCategory] = useState('');
     const [material, setMaterial] = useState('');
-    const [medium, setMedium] = useState('');
-    const [size, setSize] = useState(options.size[0].label);
+    const [colour, setColour] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [price, setPrice] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmitArt(title, material, medium, size, imageUrl, price);
-        setTitle('');
+        onSubmitJewelry(name, category, material, colour, imageUrl, price);
+        setName('');
+        setCategory('');
         setMaterial('');
-        setMedium('');
-        setSize(options.size[0].label);
+        setColour('');
         setImageUrl('');
         setPrice('');
     }
@@ -39,15 +40,15 @@ export default function AddArtForm({ onSubmitArt = (f) => f }) {
         <>
             <form onSubmit={handleSubmit}>
                 <div className='flex flex-col w-4/12 m-4 space-y-4'>
-                    <h3 className='text-left text-xl'>Art</h3>
+                    <h3 className='text-left text-xl'>Jewelry</h3>
 
                     <TextField
                         fullWidth={false}
                         variant="standard"
-                        label="Title"
-                        id='title'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        label="Name"
+                        id='name'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         required
                     />
 
@@ -76,6 +77,17 @@ export default function AddArtForm({ onSubmitArt = (f) => f }) {
                     <Autocomplete
                         freeSolo={true}
                         disablePortal
+                        id='category'
+                        options={options.category}
+                        inputValue={category}
+                        onInputChange={(e, newValue) => setCategory(newValue)}
+                        renderInput={(params) => <TextField {...params} label="Category" variant="standard" />}
+                        required
+                    />
+
+                    <Autocomplete
+                        freeSolo={true}
+                        disablePortal
                         id='material'
                         options={options.material}
                         inputValue={material}
@@ -87,23 +99,11 @@ export default function AddArtForm({ onSubmitArt = (f) => f }) {
                     <Autocomplete
                         freeSolo={true}
                         disablePortal
-                        id='medium'
-                        options={options.medium}
-                        inputValue={medium}
-                        onInputChange={(e, newValue) => setMedium(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Medium" variant="standard" />}
-                        required
-                    />
-
-                    <Autocomplete
-                        isOptionEqualToValue={() => { return true }}
-                        disablePortal
-                        id="size"
-                        options={options.size}
-                        defaultValue={options.size[0]}
-                        inputValue={size}
-                        onInputChange={(e, newValue) => setSize(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Size" variant="standard" />}
+                        id='colour'
+                        options={options.colour}
+                        inputValue={colour}
+                        onInputChange={(e, newValue) => setColour(newValue)}
+                        renderInput={(params) => <TextField {...params} label="Colour" variant="standard" />}
                         required
                     />
 
