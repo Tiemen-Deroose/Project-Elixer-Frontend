@@ -1,115 +1,104 @@
-import { TextField, Button, Autocomplete, InputAdornment } from "@mui/material"
+import { Button, InputAdornment } from "@mui/material"
 import { useState } from "react";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
 
 export default function AddArtForm({ onSubmitArt = (f) => f }) {
-    const options = {
-        material: [
-            { label: 'canvas' },
-        ],
-        medium: [
-            { label: 'acrylic paint' },
-            { label: 'resin' },
-        ],
-        size: [
-            { label: 'small' },
-            { label: 'medium' },
-            { label: 'large' },
-        ]
-    };
-
     const [title, setTitle] = useState('');
     const [material, setMaterial] = useState('');
     const [medium, setMedium] = useState('');
-    const [size, setSize] = useState(options.size[0].label);
+    const [size, setSize] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [price, setPrice] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         onSubmitArt(title, material, medium, size, imageUrl, price);
         setTitle('');
         setMaterial('');
         setMedium('');
-        setSize(options.size[0].label);
+        setSize('');
         setImageUrl('');
         setPrice('');
     }
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <ValidatorForm onSubmit={handleSubmit}>
                 <div className='flex flex-col w-4/12 m-4 space-y-4'>
                     <h3 className='text-left text-xl'>Art</h3>
 
-                    <TextField
-                        fullWidth={false}
+                    <TextValidator
+                        fullWidth
                         variant="standard"
                         label="Title"
                         id='title'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        required
+                        validators={[required.rule, lengthMax255.rule]}
+                        errorMessages={[required.message, lengthMax255.message]}
                     />
 
-                    <TextField
+                    <TextValidator
+                        fullWidth
                         variant="standard"
                         label="Image URL"
                         id='image'
                         value={imageUrl}
                         onChange={(e) => setImageUrl(e.target.value)}
-                        required
+                        validators={[required.rule, url.rule]}
+                        errorMessages={[required.message, url.message]}
                     />
 
-                    <TextField
+                    <TextValidator
+                        fullWidth
                         variant="standard"
                         label="Price"
-                        type='number'
                         InputProps={{
                             startAdornment: <InputAdornment position="start">€</InputAdornment>,
                         }}
                         id='price'
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        required
+                        validators={[required.rule, float.rule, maxDecimals2.rule, positive.rule]}
+                        errorMessages={[required.message, float.message, maxDecimals2.message, positive.message]}
                     />
 
-                    <Autocomplete
-                        freeSolo={true}
-                        disablePortal
+                    <TextValidator
+                        fullWidth
+                        variant="standard"
+                        label="Material"
                         id='material'
-                        options={options.material}
-                        inputValue={material}
-                        onInputChange={(e, newValue) => setMaterial(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Material" variant="standard" />}
-                        required
+                        value={material}
+                        onChange={(e) => setMaterial(e.target.value)}
+                        validators={[required.rule, lengthMax50.rule]}
+                        errorMessages={[required.message, lengthMax50.message]}
                     />
 
-                    <Autocomplete
-                        freeSolo={true}
-                        disablePortal
+                    <TextValidator
+                        fullWidth
+                        variant="standard"
+                        label="Medium"
                         id='medium'
-                        options={options.medium}
-                        inputValue={medium}
-                        onInputChange={(e, newValue) => setMedium(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Medium" variant="standard" />}
-                        required
+                        value={medium}
+                        onChange={(e) => setMedium(e.target.value)}
+                        validators={[required.rule, lengthMax50.rule]}
+                        errorMessages={[required.message, lengthMax50.message]}
                     />
 
-                    <Autocomplete
-                        isOptionEqualToValue={() => { return true }}
-                        disablePortal
-                        id="size"
-                        options={options.size}
-                        defaultValue={options.size[0]}
-                        inputValue={size}
-                        onInputChange={(e, newValue) => setSize(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Size" variant="standard" />}
-                        required
+                    <TextValidator
+                        fullWidth
+                        variant="standard"
+                        label="Size"
+                        id='size'
+                        value={size}
+                        onChange={(e) => setSize(e.target.value)}
+                        validators={[required.rule, lengthMax50.rule]}
+                        errorMessages={[required.message, lengthMax50.rule]}
                     />
 
                     <Button type="submit" variant="contained">Submit</Button>
                 </div>
-            </form>
+            </ValidatorForm>
         </>
     );
 }

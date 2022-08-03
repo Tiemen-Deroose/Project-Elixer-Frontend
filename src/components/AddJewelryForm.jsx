@@ -1,23 +1,9 @@
 import { TextField, Button, Autocomplete, InputAdornment } from "@mui/material"
 import { useState } from "react";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
 
 export default function AddJewelryForm({ onSubmitJewelry = (f) => f }) {
-    const options = {
-        category: [
-            { label: 'pendant' },
-            { label: 'bracelet' },
-        ],
-        material: [
-            { label: 'steel' },
-            { label: 'sterling silver' },
-            { label: 'gold' },
-        ],
-        colour: [
-            { label: 'silver' },
-            { label: 'gold' },
-        ]
-    };
-
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [material, setMaterial] = useState('');
@@ -25,8 +11,7 @@ export default function AddJewelryForm({ onSubmitJewelry = (f) => f }) {
     const [imageUrl, setImageUrl] = useState('');
     const [price, setPrice] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         onSubmitJewelry(name, category, material, colour, imageUrl, price);
         setName('');
         setCategory('');
@@ -38,78 +23,82 @@ export default function AddJewelryForm({ onSubmitJewelry = (f) => f }) {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <ValidatorForm onSubmit={handleSubmit}>
                 <div className='flex flex-col w-4/12 m-4 space-y-4'>
                     <h3 className='text-left text-xl'>Jewelry</h3>
 
-                    <TextField
-                        fullWidth={false}
+                    <TextValidator
+                        fullWidth
                         variant="standard"
                         label="Name"
                         id='name'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        required
+                        validators={[required.rule, lengthMax255.rule]}
+                        errorMessages={[required.message, lengthMax255.message]}
                     />
 
-                    <TextField
+                    <TextValidator
+                        fullWidth
                         variant="standard"
                         label="Image URL"
                         id='image'
                         value={imageUrl}
                         onChange={(e) => setImageUrl(e.target.value)}
-                        required
+                        validators={[required.rule, url.rule]}
+                        errorMessages={[required.message, url.message]}
                     />
 
-                    <TextField
+                    <TextValidator
+                        fullWidth
                         variant="standard"
                         label="Price"
-                        type='number'
                         InputProps={{
                             startAdornment: <InputAdornment position="start">€</InputAdornment>,
                         }}
                         id='price'
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
-                        required
+                        validators={[required.rule, float.rule, maxDecimals2.rule, positive.rule]}
+                        errorMessages={[required.message, float.message, maxDecimals2.message, positive.message]}
                     />
 
-                    <Autocomplete
-                        freeSolo={true}
-                        disablePortal
+                    <TextValidator
+                        fullWidth
+                        variant="standard"
+                        label="Category"
                         id='category'
-                        options={options.category}
-                        inputValue={category}
-                        onInputChange={(e, newValue) => setCategory(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Category" variant="standard" />}
-                        required
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        validators={[required.rule, lengthMax50.rule]}
+                        errorMessages={[required.message, lengthMax50.message]}
                     />
 
-                    <Autocomplete
-                        freeSolo={true}
-                        disablePortal
+                    <TextValidator
+                        fullWidth
+                        variant="standard"
+                        label="Material"
                         id='material'
-                        options={options.material}
-                        inputValue={material}
-                        onInputChange={(e, newValue) => setMaterial(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Material" variant="standard" />}
-                        required
+                        value={material}
+                        onChange={(e) => setMaterial(e.target.value)}
+                        validators={[required.rule, lengthMax50.rule]}
+                        errorMessages={[required.message, lengthMax50.message]}
                     />
 
-                    <Autocomplete
-                        freeSolo={true}
-                        disablePortal
+                    <TextValidator
+                        fullWidth
+                        variant="standard"
+                        label="Colour"
                         id='colour'
-                        options={options.colour}
-                        inputValue={colour}
-                        onInputChange={(e, newValue) => setColour(newValue)}
-                        renderInput={(params) => <TextField {...params} label="Colour" variant="standard" />}
-                        required
+                        value={colour}
+                        onChange={(e) => setColour(e.target.value)}
+                        validators={[required.rule, lengthMax50.rule]}
+                        errorMessages={[required.message, lengthMax50.message]}
                     />
 
                     <Button type="submit" variant="contained">Submit</Button>
                 </div>
-            </form>
+            </ValidatorForm>
         </>
     );
 }
