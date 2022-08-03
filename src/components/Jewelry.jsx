@@ -1,6 +1,6 @@
 import FavouriteButton from "./FavouriteButton";
 
-const Jewelry = ({ id, name, category, material, colour, image_url, price, isFavourited, onFavourite }) => {
+export default function Jewelry({ id, name, category, material, colour, image_url, price, isFavourited, onFavourite }) {
     return (
         <div className="bg-green-300 m-4 w-80 border-2 border-black rounded">
             <div>
@@ -18,8 +18,4 @@ const Jewelry = ({ id, name, category, material, colour, image_url, price, isFav
             </div>
         </div>
     );
-}
-
-export default function JewelryList({ jewelryList = [], onFavourite }) {
-    return jewelryList.map((jewelry) => <Jewelry {...jewelry} key={jewelry.id} onFavourite={onFavourite} />);
 }

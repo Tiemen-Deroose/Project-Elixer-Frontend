@@ -3,8 +3,8 @@ import { useMemo, useState } from 'react';
 import './App.css';
 import AddArtForm from './components/AddArtForm';
 import AddJewelryForm from './components/AddJewelryForm';
-import ArtList from './components/Art';
-import JewelryList from './components/Jewelry';
+import ArtList from './components/ArtList';
+import JewelryList from './components/JewelryList';
 import { ART_DATA, JEWELRY_DATA } from './data/mock-data';
 
 

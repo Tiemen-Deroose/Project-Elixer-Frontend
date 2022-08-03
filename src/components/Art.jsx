@@ -1,6 +1,6 @@
 import FavouriteButton from "./FavouriteButton";
 
-const Art = ({ id, title, material, medium, size, image_url, price, isFavourited, onFavourite }) => {
+export default function Art({ id, title, material, medium, size, image_url, price, isFavourited, onFavourite }) {
     return (
         <div className="bg-green-300 m-4 w-80 border-2 border-black rounded">
             <div>
@@ -18,8 +18,4 @@ const Art = ({ id, title, material, medium, size, image_url, price, isFavourited
             </div>
         </div>
     );
-}
-
-export default function ArtList({ artList = [], onFavourite }) {
-    return artList.map((art) => <Art {...art} key={art.id} onFavourite={onFavourite} />);
 }
