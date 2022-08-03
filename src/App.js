@@ -1,5 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import './App.css';
 import AddArtForm from './components/AddArtForm';
 import AddJewelryForm from './components/AddJewelryForm';
@@ -14,14 +14,14 @@ function App() {
   const [text, setText] = useState('');
   const [search, setSearch] = useState('');
 
-  const favouriteArt = (id) => {
+  const favouriteArt = useCallback((id) => {
     const newArt = art.map((a) => (a.id === id ? { ...a, isFavourited: !a.isFavourited } : a));
     setArt(newArt);
-  }
-  const favouriteJewelry = (id) => {
+  }, [art]);
+  const favouriteJewelry = useCallback((id) => {
     const newJewelry = jewelry.map((j) => (j.id === id ? { ...j, isFavourited: !j.isFavourited } : j));
     setJewelry(newJewelry);
-  }
+  }, [jewelry]);
   const createArt = (title, material, medium, size, image_url, price) => {
     setArt([{ id: Date.now(), title, material, medium, size, image_url, price }, ...art, ]);
   }

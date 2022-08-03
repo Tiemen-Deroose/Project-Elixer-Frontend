@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import FavouriteButton from "./FavouriteButton";
 
-export default function Jewelry({ id, name, category, material, colour, image_url, price, isFavourited, onFavourite }) {
+export default memo(function Jewelry({ id, name, category, material, colour, image_url, price, isFavourited, onFavourite }) {
     return (
         <div className="bg-green-300 m-4 w-80 border-2 border-black rounded">
             <div>
@@ -18,4 +19,4 @@ export default function Jewelry({ id, name, category, material, colour, image_ur
             </div>
         </div>
     );
-}
+})
