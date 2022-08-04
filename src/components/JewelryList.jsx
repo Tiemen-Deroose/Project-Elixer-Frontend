@@ -5,7 +5,7 @@ import Jewelry from "./Jewelry";
 export default function JewelryList({ search }) {
     const { jewelryList, error, loading } = useContext(JewelryContext);
 
-    const favouriteJewelry = useCallback((id) => {
+    const favouriteJewelry = useCallback((_id) => {
         //TODO: update to db
         //const newArt = art.map((a) => (a.id === id ? { ...a, isFavourited: !a.isFavourited } : a));
         //setArt(newArt);
@@ -18,7 +18,7 @@ export default function JewelryList({ search }) {
       
           return Object.entries(a).find(([key, value]) => {
             return (
-              !['id','image_url','price'].includes(key)
+              !['_id','image_url','price'].includes(key)
               && value.toLowerCase().includes(search)
             )
           });
@@ -29,5 +29,5 @@ export default function JewelryList({ search }) {
     if (error) return <pre className="text-red-600">{error.message}</pre>
     if (!jewelryList) return null;
 
-    return filteredJewelry.map((jewelry) => <Jewelry {...jewelry} key={jewelry.id} onFavourite={favouriteJewelry} />);
+    return filteredJewelry.map((jewelry) => <Jewelry {...jewelry} key={jewelry._id} onFavourite={favouriteJewelry} />);
 }
