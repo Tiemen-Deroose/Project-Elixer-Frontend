@@ -1,18 +1,20 @@
 import { Button, InputAdornment } from "@mui/material"
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ArtContext } from '../contexts/ArtProvider';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
 
-export default function AddArtForm({ onSubmitArt = (f) => f }) {
+export default function AddArtForm() {
+    const { createArt } = useContext(ArtContext);
     const [title, setTitle] = useState('');
     const [material, setMaterial] = useState('');
     const [medium, setMedium] = useState('');
     const [size, setSize] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    const [image_url, setImageUrl] = useState('');
     const [price, setPrice] = useState('');
 
     const handleSubmit = () => {
-        onSubmitArt(title, material, medium, size, imageUrl, price);
+        createArt({ title, material, medium, size, image_url, price });
         setTitle('');
         setMaterial('');
         setMedium('');
@@ -43,7 +45,7 @@ export default function AddArtForm({ onSubmitArt = (f) => f }) {
                         variant="standard"
                         label="Image URL"
                         id='image'
-                        value={imageUrl}
+                        value={image_url}
                         onChange={(e) => setImageUrl(e.target.value)}
                         validators={[required.rule, url.rule]}
                         errorMessages={[required.message, url.message]}

@@ -1,18 +1,20 @@
 import { Button, InputAdornment } from "@mui/material"
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { JewelryContext } from '../contexts/JewelryProvider';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
 
-export default function AddJewelryForm({ onSubmitJewelry = (f) => f }) {
+export default function AddJewelryForm() {
+    const { createJewelry } = useContext(JewelryContext);
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [material, setMaterial] = useState('');
     const [colour, setColour] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    const [image_url, setImageUrl] = useState('');
     const [price, setPrice] = useState('');
 
     const handleSubmit = () => {
-        onSubmitJewelry(name, category, material, colour, imageUrl, price);
+        createJewelry({name, category, material, colour, image_url, price});
         setName('');
         setCategory('');
         setMaterial('');
@@ -43,7 +45,7 @@ export default function AddJewelryForm({ onSubmitJewelry = (f) => f }) {
                         variant="standard"
                         label="Image URL"
                         id='image'
-                        value={imageUrl}
+                        value={image_url}
                         onChange={(e) => setImageUrl(e.target.value)}
                         validators={[required.rule, url.rule]}
                         errorMessages={[required.message, url.message]}

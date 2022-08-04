@@ -7,6 +7,26 @@ export const JewelryProvider = ({ children }) => {
   const [jewelryList, setJewelryList] = useState([]);
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+
+  const createJewelry = async ({
+    name, 
+    category, 
+    material, 
+    colour, 
+    image_url, 
+    price,
+  }) => {
+    setError();
+    try {
+      const { newJewelry } = await axios.post('http://localhost:9000/api/jewelry/',
+        { name, category, material, colour, image_url, price: Number(price), });
+      await refreshJewelry();
+      return newJewelry;
+    } catch (error) {
+      console.error(error);
+      setError(error);
+    }
+  };
   
   const refreshJewelry = useCallback(async () => {
     try {
@@ -28,7 +48,7 @@ export const JewelryProvider = ({ children }) => {
   }, [refreshJewelry]);
 
   return (
-    <JewelryContext.Provider value={{ jewelryList, error, loading}}>
+    <JewelryContext.Provider value={{ jewelryList, error, loading, createJewelry}}>
       {children}
     </JewelryContext.Provider>
   );
