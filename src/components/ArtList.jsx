@@ -29,5 +29,8 @@ export default function ArtList({ search }) {
     if (error) return <pre className="text-red-600">{error.message}</pre>
     if (!artList) return null;
 
-    return filteredArt.map((art) => <Art {...art} key={art._id} onFavourite={favouriteArt} />);
+    return <div className='flex flex-wrap m-6'>
+        {filteredArt.map((art) => <Art {...art} key={art._id} onFavourite={favouriteArt} />)}
+    </div>
+
 }

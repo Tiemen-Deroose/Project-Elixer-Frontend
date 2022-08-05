@@ -1,14 +1,15 @@
 import React from 'react';
-import { FcLike, FcDislike } from "react-icons/fc";
+import Favorite from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import { IconButton } from '@mui/material';
 
 const chooseEmoji = (state) => {
-    const size = 42; //14-28-42-56-70 
-    return state ? <FcDislike size={size} /> : <FcLike size={size} />;
+    return state ? <Favorite fontSize='large' /> : <FavoriteBorder fontSize='large' />;
 }
 
 export default function FavouriteButton({ state, onFavourite }) {
 
-    return <div onClick={() => onFavourite()}>
+    return <IconButton color='error' onClick={() => onFavourite()}>
         {chooseEmoji(state)}
-    </div>
+    </IconButton>
 }
