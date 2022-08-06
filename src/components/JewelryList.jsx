@@ -29,7 +29,7 @@ export default function JewelryList({ search }) {
   if (error) return <pre className="text-red-600">{error.message}</pre>
   if (!jewelryList) return null;
 
-  return <div className='flex flex-wrap m-6'>
+  return <div className='flex flex-wrap'>
     {filteredJewelry.map((jewelry) => <Jewelry {...jewelry} key={jewelry._id} onFavourite={favouriteJewelry} />)}
   </div>
 }
