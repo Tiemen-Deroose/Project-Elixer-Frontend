@@ -1,36 +1,23 @@
-import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
+import { createTheme, CssBaseline } from '@mui/material';
 import './App.css';
-import AddArtForm from './components/AddArtForm'
-import AddJewelryForm from './components/AddJewelryForm';
-import ArtList from './components/ArtList';
-import JewelryList from './components/JewelryList';
-import { ArtProvider } from './contexts/ArtProvider';
-import { JewelryProvider } from './contexts/JewelryProvider';
+import { Route, Routes } from 'react-router-dom'
+import Browse from './pages/Browse'
+import ArtPage from './pages/ArtPage';
+import JewelryPage from './pages/JewelryPage';
+import Navbar from './components/NavBar';
+import NotFound from './pages/NotFound';
 
 function App() {
-  const [text, setText] = useState('');
-  const [search, setSearch] = useState('');
-  
-  return (
-    <div className="App">
-      <div className="m-5 flex">
-        <TextField variant="standard" id='text' value={text} onChange={(e) => setText(e.target.value)} />
-        <Button variant="contained" onClick={()=>setSearch(text.toLowerCase())}>Search</Button>
-		  </div>
-
-      <ArtProvider>
-        <ArtList search={search} />
-        <AddArtForm />
-      </ArtProvider>
-      
-      <JewelryProvider>
-        <JewelryList search={search} />
-        <AddJewelryForm />
-      </JewelryProvider>
-
-    </div>
-  );
+  return <>
+    <CssBaseline />
+      <Navbar />
+      <Routes>
+        <Route exact path='/' element={<Browse />} />
+        <Route exact path='/art' element={<ArtPage />} />
+        <Route exact path='/jewelry' element={<JewelryPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
 }
 
 export default App;
