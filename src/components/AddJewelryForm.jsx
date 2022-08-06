@@ -5,7 +5,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
 
 export default function AddJewelryForm() {
-    const { createJewelry } = useContext(JewelryContext);
+    const { createOrUpdateJewelry } = useContext(JewelryContext);
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [material, setMaterial] = useState('');
@@ -14,7 +14,7 @@ export default function AddJewelryForm() {
     const [price, setPrice] = useState('');
 
     const handleSubmit = () => {
-        createJewelry({name, category, material, colour, image_url, price});
+        createOrUpdateJewelry({name, category, material, colour, image_url, price});
         setName('');
         setCategory('');
         setMaterial('');

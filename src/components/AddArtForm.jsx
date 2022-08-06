@@ -5,7 +5,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
 
 export default function AddArtForm() {
-    const { createArt } = useContext(ArtContext);
+    const { createOrUpdateArt } = useContext(ArtContext);
     const [title, setTitle] = useState('');
     const [material, setMaterial] = useState('');
     const [medium, setMedium] = useState('');
@@ -14,7 +14,7 @@ export default function AddArtForm() {
     const [price, setPrice] = useState('');
 
     const handleSubmit = () => {
-        createArt({ title, material, medium, size, image_url, price });
+        createOrUpdateArt({ title, material, medium, size, image_url, price });
         setTitle('');
         setMaterial('');
         setMedium('');

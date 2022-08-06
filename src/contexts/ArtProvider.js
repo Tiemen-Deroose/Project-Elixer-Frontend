@@ -26,7 +26,7 @@ export const ArtProvider = ({ children }) => {
     setLoading(true);
 
     const method = _id ? 'put' : 'post';
-    const url = `http://localhost:9000/api/art/${_id}`;
+    const url = `http://localhost:9000/api/art/${_id || ''}`;
     const data = { title, material, medium, size, image_url, price: Number(price) };
 
     try {

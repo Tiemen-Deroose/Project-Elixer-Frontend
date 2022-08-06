@@ -45,7 +45,7 @@ export const JewelryProvider = ({ children }) => {
     setError();
     setLoading(true);
 
-    const url = `http://localhost:9000/api/jewelry/${_id}`;
+    const url = `http://localhost:9000/api/jewelry/${_id || ''}`;
 
     try {
       const { result } = await axios.delete(url);
