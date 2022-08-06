@@ -1,8 +1,9 @@
+import { CircularProgress } from '@mui/material';
 import { useContext, useCallback, useMemo } from 'react';
 import { JewelryContext } from '../contexts/JewelryProvider';
 import Jewelry from "./Jewelry";
 
-export default function JewelryList({ search }) {
+export default function JewelryList({ search = '' }) {
   const { jewelryList, error, loading } = useContext(JewelryContext);
 
   const favouriteJewelry = useCallback((_id) => {
@@ -25,7 +26,7 @@ export default function JewelryList({ search }) {
     });
   }, [jewelryList, search]);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <CircularProgress className='m-40' />;
   if (error) return <pre className="text-red-600">{error.message}</pre>
   if (!jewelryList) return null;
 

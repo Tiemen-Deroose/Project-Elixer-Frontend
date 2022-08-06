@@ -1,8 +1,9 @@
+import { CircularProgress } from '@mui/material';
 import { useContext, useCallback, useMemo } from 'react';
 import { ArtContext } from '../contexts/ArtProvider';
 import Art from "./Art";
 
-export default function ArtList({ search }) {
+export default function ArtList({ search = '' }) {
     const { artList, error, loading } = useContext(ArtContext);
 
     const favouriteArt = useCallback((_id) => {
@@ -25,7 +26,7 @@ export default function ArtList({ search }) {
         });
     }, [artList, search]);
 
-    if (loading) return <h1>Loading...</h1>;
+    if (loading) return <CircularProgress className='m-40' />;
     if (error) return <pre className="text-red-600">{error.message}</pre>
     if (!artList) return null;
 

@@ -56,7 +56,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                     />
                 </CardActionArea>
                 <CardContent>
-                    <Typography variant="h6">
+                    <Typography variant='h6' align='center'>
                         {title}
                     </Typography>
 

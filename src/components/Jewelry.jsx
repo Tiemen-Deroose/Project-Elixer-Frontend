@@ -56,7 +56,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                     />
                 </CardActionArea>
                 <CardContent>
-                    <Typography variant="h6">
+                    <Typography variant='h6' align='center'>
                         {name}
                     </Typography>
 
