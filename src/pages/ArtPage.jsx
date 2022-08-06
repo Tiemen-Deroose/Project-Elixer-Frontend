@@ -5,8 +5,8 @@ import { ArtProvider } from "../contexts/ArtProvider";
 export default function ArtPage() {
     return <>
         <ArtProvider>
-            <AddArtForm />
             <ArtList />
+            <AddArtForm />
         </ArtProvider>
     </>
 }

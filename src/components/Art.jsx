@@ -11,7 +11,7 @@ import { ArtContext } from '../contexts/ArtProvider';
 
 export default memo(function Art({ _id, title, material, medium, size, image_url, price }) {
     const { favouriteArt, createOrUpdateArt, deleteArt } = useContext(ArtContext);
-    
+
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const [editedTitle, setEditedTitle] = useState(title);
     const [editedMaterial, setEditedMaterial] = useState(material);
@@ -84,7 +84,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                 <CardActions className='flex justify-between'>
                     <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} />
                     <div>
-                        <IconButton color='primary' onClick={handleClickEditButton}><EditIcon fontSize='large' /></IconButton>
+                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' /></IconButton>
                         <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' /></IconButton>
                     </div>
                 </CardActions>

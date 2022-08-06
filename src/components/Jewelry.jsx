@@ -82,9 +82,9 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                     </List>
                 </CardContent>
                 <CardActions className='flex justify-between'>
-                    <FavouriteButton state={isFavourited} onFavourite={() => onFavourite(_id)} />
+                    <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} />
                     <div>
-                        <IconButton color='primary' onClick={handleClickEditButton}><EditIcon fontSize='large' /></IconButton>
+                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' /></IconButton>
                         <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' /></IconButton>
                     </div>
                 </CardActions>
