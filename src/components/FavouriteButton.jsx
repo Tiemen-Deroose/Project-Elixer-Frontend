@@ -7,9 +7,15 @@ const chooseEmoji = (state) => {
     return state ? <Favorite fontSize='large' /> : <FavoriteBorder fontSize='large' />;
 }
 
-export default function FavouriteButton({ state, onFavourite }) {
+export default function FavouriteButton({ initialState, onFavourite }) {
+    const [state, setState] = React.useState(initialState);
 
-    return <IconButton color='error' onClick={() => onFavourite()}>
+    const toggleState = () => {
+        setState(!state);
+        onFavourite(state); //todo: add id of favourited object to user
+    }
+
+    return <IconButton color='error' onClick={toggleState}>
         {chooseEmoji(state)}
     </IconButton>
 }
