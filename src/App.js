@@ -7,8 +7,6 @@ import JewelryPage from './pages/JewelryPage';
 import Navbar from './components/NavBar';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from '@emotion/react';
-import AddArtForm from './components/AddArtForm';
-import AddJewelryForm from './components/AddJewelryForm';
 import { ArtProvider } from './contexts/ArtProvider';
 import { JewelryProvider } from './contexts/JewelryProvider';
 import ArtFormPage from './pages/ArtFormPage';

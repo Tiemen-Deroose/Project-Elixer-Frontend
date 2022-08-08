@@ -1,7 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-import ArtList from "../components/ArtList";
-import JewelryList from "../components/JewelryList";
+import MixedList from "../components/MixedList";
 
 export default function Browse() {
     const [text, setText] = useState('');
@@ -14,9 +13,8 @@ export default function Browse() {
             <Button variant='contained' color='secondary' size='small' onClick={() => { setText(''); setSearch(''); }}>Clear</Button>
         </div>
 
-        <div className="flex">
-            <ArtList search={search} />
-            <JewelryList search={search} />
+        <div className="flex justify-center">
+            <MixedList search={search} />
         </div>
 
     </>

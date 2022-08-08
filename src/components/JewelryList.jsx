@@ -1,9 +1,9 @@
 import { CircularProgress } from '@mui/material';
-import { useContext, useCallback, useMemo } from 'react';
+import { useContext, useCallback } from 'react';
 import { JewelryContext } from '../contexts/JewelryProvider';
 import Jewelry from "./Jewelry";
 
-export default function JewelryList({ search = '' }) {
+export default function JewelryList() {
   const { jewelryList, error, loading } = useContext(JewelryContext);
 
   const favouriteJewelry = useCallback((_id) => {
@@ -12,25 +12,11 @@ export default function JewelryList({ search = '' }) {
     //setArt(newArt);
   }, []);
 
-  const filteredJewelry = useMemo(() => {
-    return jewelryList.filter((a) => {
-      if (search.includes('jewelry'))
-        return true;
-
-      return Object.entries(a).find(([key, value]) => {
-        return (
-          !['_id', 'image_url', 'price'].includes(key)
-          && value.toLowerCase().includes(search)
-        )
-      });
-    });
-  }, [jewelryList, search]);
-
   if (loading) return <CircularProgress className='m-40' />;
   if (error) return <pre className="text-red-600">{error.message}</pre>
   if (!jewelryList) return null;
 
-  return <div className='flex flex-wrap'>
-    {filteredJewelry.map((jewelry) => <Jewelry {...jewelry} key={jewelry._id} onFavourite={favouriteJewelry} />)}
+  return <div className='flex flex-wrap justify-center'>
+    {jewelryList.map((jewelry) => <Jewelry {...jewelry} key={jewelry._id} onFavourite={favouriteJewelry} />)}
   </div>
 }
