@@ -3,8 +3,10 @@ import { useState, useContext } from "react";
 import { ArtContext } from '../contexts/ArtProvider';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
+import { useNavigate } from 'react-router-dom';
 
 export default function AddArtForm() {
+    const navigate = useNavigate();
     const { createOrUpdateArt } = useContext(ArtContext);
     const [title, setTitle] = useState('');
     const [material, setMaterial] = useState('');
@@ -15,12 +17,7 @@ export default function AddArtForm() {
 
     const handleSubmit = () => {
         createOrUpdateArt({ title, material, medium, size, image_url, price });
-        setTitle('');
-        setMaterial('');
-        setMedium('');
-        setSize('');
-        setImageUrl('');
-        setPrice('');
+        navigate('/art');
     }
 
     return (

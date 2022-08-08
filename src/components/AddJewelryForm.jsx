@@ -3,8 +3,10 @@ import { useState, useContext } from "react";
 import { JewelryContext } from '../contexts/JewelryProvider';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules'
+import { useNavigate } from 'react-router-dom';
 
 export default function AddJewelryForm() {
+    const navigate = useNavigate();
     const { createOrUpdateJewelry } = useContext(JewelryContext);
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
@@ -15,12 +17,7 @@ export default function AddJewelryForm() {
 
     const handleSubmit = () => {
         createOrUpdateJewelry({ name, category, material, colour, image_url, price });
-        setName('');
-        setCategory('');
-        setMaterial('');
-        setColour('');
-        setImageUrl('');
-        setPrice('');
+        navigate('/jewelry');
     }
 
     return (
