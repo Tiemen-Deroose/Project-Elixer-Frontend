@@ -1,4 +1,4 @@
-import { Button, InputAdornment } from "@mui/material"
+import { Button, Card, InputAdornment, Typography } from "@mui/material"
 import { useState, useContext } from "react";
 import { JewelryContext } from '../contexts/JewelryProvider';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
@@ -14,7 +14,7 @@ export default function AddJewelryForm() {
     const [price, setPrice] = useState('');
 
     const handleSubmit = () => {
-        createOrUpdateJewelry({name, category, material, colour, image_url, price});
+        createOrUpdateJewelry({ name, category, material, colour, image_url, price });
         setName('');
         setCategory('');
         setMaterial('');
@@ -24,10 +24,10 @@ export default function AddJewelryForm() {
     }
 
     return (
-        <>
+        <Card>
             <ValidatorForm onSubmit={handleSubmit}>
-                <div className='flex flex-col w-4/12 m-4 space-y-4'>
-                    <h3 className='text-left text-xl'>Jewelry</h3>
+                <div className='flex flex-col m-4 space-y-4'>
+                    <Typography variant="h5" component="h5">Create new jewelry</Typography>
 
                     <TextValidator
                         fullWidth
@@ -101,6 +101,6 @@ export default function AddJewelryForm() {
                     <Button type="submit" variant="contained">Submit</Button>
                 </div>
             </ValidatorForm>
-        </>
+        </Card>
     );
 }
