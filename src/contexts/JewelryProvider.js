@@ -26,7 +26,7 @@ export const JewelryProvider = ({ children }) => {
     setLoading(true);
 
     const method = _id ? 'put' : 'post';
-    const url = `http://localhost:9000/api/jewelry/${_id}`;
+    const url = `http://localhost:9000/api/jewelry/${_id || ''}`;
     const data = { name, category, material, colour, image_url, price: Number(price) };
 
     try {
