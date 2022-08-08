@@ -1,6 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import { useContext, useCallback } from 'react';
 import { JewelryContext } from '../contexts/JewelryProvider';
+import CreateNewCard from './CreateNewCard';
 import Jewelry from "./Jewelry";
 
 export default function JewelryList() {
@@ -18,5 +19,6 @@ export default function JewelryList() {
 
   return <div className='flex flex-wrap justify-center'>
     {jewelryList.map((jewelry) => <Jewelry {...jewelry} key={jewelry._id} onFavourite={favouriteJewelry} />)}
+    <CreateNewCard formLink='/jewelry/add' />
   </div>
 }
