@@ -47,16 +47,17 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
 
     return (
         <>
-            <Card className='max-w-xs m-6'>
+            <Card className='max-w-xs m-6' data-cy='art'>
                 <CardActionArea href={image_url} target='_blank'>
                     <CardMedia className='h-80'
                         component='img'
                         image={image_url}
                         alt={title}
+                        data-cy='art_image'
                     />
                 </CardActionArea>
                 <CardContent>
-                    <Typography variant='h6' align='center'>
+                    <Typography variant='h6' align='center' data-cy='art_title'>
                         {title}
                     </Typography>
 
@@ -65,32 +66,32 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                     <List>
                         <ListItem>
                             <ListItemIcon><PaletteIcon /></ListItemIcon>
-                            <ListItemText primary='Medium' secondary={medium} />
+                            <ListItemText primary='Medium' secondary={medium} data-cy='art_medium' />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon><BrushIcon /></ListItemIcon>
-                            <ListItemText primary='Material' secondary={material} />
+                            <ListItemText primary='Material' secondary={material} data-cy='art_material' />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon><AspectRatioIcon /></ListItemIcon>
-                            <ListItemText primary='Size' secondary={size} />
+                            <ListItemText primary='Size' secondary={size} data-cy='art_size' />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon><EuroIcon /></ListItemIcon>
-                            <ListItemText primary={price} />
+                            <ListItemText primary={price} data-cy='art_price' />
                         </ListItem>
                     </List>
                 </CardContent>
                 <CardActions className='flex justify-between'>
-                    <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} />
+                    <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} data-cy='art_favourite_button' />
                     <div>
-                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' /></IconButton>
-                        <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' /></IconButton>
+                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='art_edit_button' /></IconButton>
+                        <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='art_delete_button' /></IconButton>
                     </div>
                 </CardActions>
             </Card>
 
-            <Dialog open={openEditDialog} onClose={handleEdit}>
+            <Dialog open={openEditDialog} onClose={handleEdit} data-cy='art_edit_dialog' >
                 <DialogTitle>Edit Art</DialogTitle>
                 <DialogContent className='space-y-4'>
                     <TextField
@@ -100,6 +101,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                         id='title'
                         value={editedTitle}
                         onChange={(e) => setEditedTitle(e.target.value)}
+                        data-cy='art_edit_title_input'
                     />
 
                     <TextField
@@ -109,6 +111,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                         id='image'
                         value={editedImageUrl}
                         onChange={(e) => setEditedImageUrl(e.target.value)}
+                        data-cy='art_edit_url_input'
                     />
 
                     <TextField
@@ -121,6 +124,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                         id='price'
                         value={editedPrice}
                         onChange={(e) => setEditedPrice(e.target.value)}
+                        data-cy='art_edit_price_input'
                     />
 
                     <TextField
@@ -130,6 +134,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                         id='material'
                         value={editedMaterial}
                         onChange={(e) => setEditedMaterial(e.target.value)}
+                        data-cy='art_edit_material_input'
                     />
 
                     <TextField
@@ -139,6 +144,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                         id='medium'
                         value={editedMedium}
                         onChange={(e) => setEditedMedium(e.target.value)}
+                        data-cy='art_edit_medium_input'
                     />
 
                     <TextField
@@ -148,10 +154,11 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                         id='size'
                         value={editedSize}
                         onChange={(e) => setEditedSize(e.target.value)}
+                        data-cy='art_edit_size_input'
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleEdit}>Confirm</Button>
+                    <Button onClick={handleEdit} data-cy='art_edit_confirm_button'>Confirm</Button>
                 </DialogActions>
             </Dialog>
         </>
