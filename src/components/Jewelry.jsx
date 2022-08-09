@@ -47,16 +47,17 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
 
     return (
         <>
-            <Card className='max-w-xs m-6'>
+            <Card className='max-w-xs m-6' data-cy='jewelry'>
                 <CardActionArea href={image_url} target='_blank'>
                     <CardMedia className='h-80'
                         component='img'
                         image={image_url}
                         alt={name}
+                        data-cy='jewelry_image'
                     />
                 </CardActionArea>
                 <CardContent>
-                    <Typography variant='h6' align='center'>
+                    <Typography variant='h6' align='center' data-cy='jewelry_name'>
                         {name}
                     </Typography>
 
@@ -65,32 +66,32 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                     <List>
                         <ListItem>
                             <ListItemIcon><DiamondIcon /></ListItemIcon>
-                            <ListItemText primary='Category' secondary={category} />
+                            <ListItemText primary='Category' secondary={category} data-cy='jewelry_category' />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon><ConstructionIcon /></ListItemIcon>
-                            <ListItemText primary='Material' secondary={material} />
+                            <ListItemText primary='Material' secondary={material} data-cy='jewelry_material' />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon><PaletteIcon /></ListItemIcon>
-                            <ListItemText primary='Colour' secondary={colour} />
+                            <ListItemText primary='Colour' secondary={colour} data-cy='jewelry_colour' />
                         </ListItem>
                         <ListItem>
                             <ListItemIcon><EuroIcon /></ListItemIcon>
-                            <ListItemText primary={price} />
+                            <ListItemText primary={price} data-cy='jewelry_price' />
                         </ListItem>
                     </List>
                 </CardContent>
                 <CardActions className='flex justify-between'>
-                    <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} />
+                    <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} data-cy='jewelry_favourite_button' />
                     <div>
-                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' /></IconButton>
-                        <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' /></IconButton>
+                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='jewelry_edit_button' /></IconButton>
+                        <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='jewelry_delete_button' /></IconButton>
                     </div>
                 </CardActions>
             </Card>
 
-            <Dialog open={openEditDialog} onClose={handleEdit}>
+            <Dialog open={openEditDialog} onClose={handleEdit} data-cy='jewelry_edit_dialog'>
                 <DialogTitle>Edit Jewelry</DialogTitle>
                 <DialogContent className='space-y-4'>
                     <TextField
@@ -100,6 +101,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                         id='name'
                         value={editedName}
                         onChange={(e) => setEditedName(e.target.value)}
+                        data-cy='jewelry_edit_name_input'
                     />
 
                     <TextField
@@ -109,6 +111,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                         id='image'
                         value={editedImageUrl}
                         onChange={(e) => setEditedImageUrl(e.target.value)}
+                        data-cy='jewelry_edit_url_input'
                     />
 
                     <TextField
@@ -121,6 +124,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                         id='price'
                         value={editedPrice}
                         onChange={(e) => setEditedPrice(e.target.value)}
+                        data-cy='jewelry_edit_price_input'
                     />
 
                     <TextField
@@ -130,6 +134,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                         id='category'
                         value={editedCategory}
                         onChange={(e) => setEditedCategory(e.target.value)}
+                        data-cy='jewelry_edit_category_input'
                     />
 
                     <TextField
@@ -139,6 +144,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                         id='material'
                         value={editedMaterial}
                         onChange={(e) => setEditedMaterial(e.target.value)}
+                        data-cy='jewelry_edit_material_input'
                     />
 
                     <TextField
@@ -148,10 +154,11 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                         id='colour'
                         value={editedColour}
                         onChange={(e) => setEditedColour(e.target.value)}
+                        data-cy='jewelry_edit_colour_input'
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleEdit}>Confirm</Button>
+                    <Button onClick={handleEdit} data-cy='jewelry_edit_confirm_button'>Confirm</Button>
                 </DialogActions>
             </Dialog>
         </>

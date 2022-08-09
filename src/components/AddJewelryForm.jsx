@@ -35,6 +35,7 @@ export default function AddJewelryForm() {
                         onChange={(e) => setName(e.target.value)}
                         validators={[required.rule, lengthMax255.rule]}
                         errorMessages={[required.message, lengthMax255.message]}
+                        data-cy='jewelry_name_input'
                     />
 
                     <TextValidator
@@ -46,6 +47,7 @@ export default function AddJewelryForm() {
                         onChange={(e) => setImageUrl(e.target.value)}
                         validators={[required.rule, url.rule]}
                         errorMessages={[required.message, url.message]}
+                        data-cy='jewelry_url_input'
                     />
 
                     <TextValidator
@@ -60,6 +62,7 @@ export default function AddJewelryForm() {
                         onChange={(e) => setPrice(e.target.value)}
                         validators={[required.rule, float.rule, maxDecimals2.rule, positive.rule]}
                         errorMessages={[required.message, float.message, maxDecimals2.message, positive.message]}
+                        data-cy='jewelry_price_input'
                     />
 
                     <TextValidator
@@ -71,6 +74,7 @@ export default function AddJewelryForm() {
                         onChange={(e) => setCategory(e.target.value)}
                         validators={[required.rule, lengthMax50.rule]}
                         errorMessages={[required.message, lengthMax50.message]}
+                        data-cy='jewelry_category_input'
                     />
 
                     <TextValidator
@@ -82,6 +86,7 @@ export default function AddJewelryForm() {
                         onChange={(e) => setMaterial(e.target.value)}
                         validators={[required.rule, lengthMax50.rule]}
                         errorMessages={[required.message, lengthMax50.message]}
+                        data-cy='jewelry_material_input'
                     />
 
                     <TextValidator
@@ -93,9 +98,10 @@ export default function AddJewelryForm() {
                         onChange={(e) => setColour(e.target.value)}
                         validators={[required.rule, lengthMax50.rule]}
                         errorMessages={[required.message, lengthMax50.message]}
+                        data-cy='jewelry_colour_input'
                     />
 
-                    <Button type="submit" variant="contained">Submit</Button>
+                    <Button type="submit" variant="contained" data-cy='jewelry_submit_button'>Submit</Button>
                 </div>
             </ValidatorForm>
         </Card>
