@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import * as jewelryApi from '../api/jewelry'
 
 export const JewelryContext = createContext();
 
@@ -9,10 +9,11 @@ export const JewelryProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   
   const refreshJewelry = useCallback(async () => {
+    setError();
+    setLoading(true);
+
     try {
-      setError();
-      setLoading(true);
-      const { data } = await axios.get(`http://localhost:9000/api/jewelry?limit=10&offset=0`);
+      const data = await jewelryApi.getAllJewelry();
       setJewelryList(data.data);
     } catch (error) {
       setError(error)
@@ -25,14 +26,9 @@ export const JewelryProvider = ({ children }) => {
     setError();
     setLoading(true);
 
-    const method = _id ? 'put' : 'post';
-    const url = `http://localhost:9000/api/jewelry/${_id || ''}`;
-    const data = { name, category, material, colour, image_url, price: Number(price) };
-
     try {
-      const { resultJewelry } = await axios({ method, url, data });
+      await jewelryApi.saveJewelry({ _id, name, category, material, colour, image_url, price });
       await refreshJewelry();
-      return resultJewelry;
     } catch (error) {
       console.error(error);
       setError(error);
@@ -45,12 +41,9 @@ export const JewelryProvider = ({ children }) => {
     setError();
     setLoading(true);
 
-    const url = `http://localhost:9000/api/jewelry/${_id || ''}`;
-
     try {
-      const { result } = await axios.delete(url);
+      await jewelryApi.deleteJewelry(_id);
       await refreshJewelry();
-      return result;
     } catch (error) {
       console.error(error);
       setError(error);

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import * as artApi from '../api/art'
 
 export const ArtContext = createContext();
 
@@ -9,10 +9,11 @@ export const ArtProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const refreshArt = useCallback(async () => {
+    setError();
+    setLoading(true);
+
     try {
-      setError();
-      setLoading(true);
-      const { data } = await axios.get(`http://localhost:9000/api/art?limit=10&offset=0`);
+      const data = await artApi.getAllArt();
       setArtList(data.data);
     } catch (error) {
       setError(error)
@@ -25,14 +26,9 @@ export const ArtProvider = ({ children }) => {
     setError();
     setLoading(true);
 
-    const method = _id ? 'put' : 'post';
-    const url = `http://localhost:9000/api/art/${_id || ''}`;
-    const data = { title, material, medium, size, image_url, price: Number(price) };
-
     try {
-      const { resultArt } = await axios({ method, url, data });
+      await artApi.saveArt({ title, material, medium, size, image_url, price });
       await refreshArt();
-      return resultArt;
     } catch (error) {
       console.error(error);
       setError(error);
@@ -45,12 +41,9 @@ export const ArtProvider = ({ children }) => {
     setError();
     setLoading(true);
 
-    const url = `http://localhost:9000/api/art/${_id}`;
-
     try {
-      const { result } = await axios.delete(url);
+      await artApi.deleteArt(_id);
       await refreshArt();
-      return result;
     } catch (error) {
       console.error(error);
       setError(error);
