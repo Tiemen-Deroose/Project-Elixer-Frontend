@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import * as artApi from '../api/art'
 
 export const ArtContext = createContext();
@@ -56,8 +56,25 @@ export const ArtProvider = ({ children }) => {
       refreshArt();
   }, [refreshArt]);
 
+  const value = useMemo(
+    () => ({
+      artList,
+      error,
+      loading,
+      createOrUpdateArt,
+      deleteArt,
+    }),
+    [
+      artList,
+      error,
+      loading,
+      createOrUpdateArt,
+      deleteArt,
+    ]
+  );
+
   return (
-    <ArtContext.Provider value={{ artList, error, loading, createOrUpdateArt, deleteArt}}>
+    <ArtContext.Provider value={value}>
       {children}
     </ArtContext.Provider>
   );

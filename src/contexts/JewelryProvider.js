@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import * as jewelryApi from '../api/jewelry'
 
 export const JewelryContext = createContext();
@@ -56,8 +56,25 @@ export const JewelryProvider = ({ children }) => {
       refreshJewelry();
   }, [refreshJewelry]);
 
+  const value = useMemo(
+    () => ({
+      jewelryList,
+      error,
+      loading,
+      createOrUpdateJewelry,
+      deleteJewelry,
+    }),
+    [
+      jewelryList,
+      error,
+      loading,
+      createOrUpdateJewelry,
+      deleteJewelry,
+    ]
+  );
+
   return (
-    <JewelryContext.Provider value={{ jewelryList, error, loading, createOrUpdateJewelry, deleteJewelry}}>
+    <JewelryContext.Provider value={value}>
       {children}
     </JewelryContext.Provider>
   );
