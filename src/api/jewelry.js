@@ -1,9 +1,8 @@
-import axios from 'axios';
-import config from '../config.json';
+import { axios } from '.';
 
 export const getAllJewelry = async () => {
     const { data } = await axios.get(
-        `${config.api_url}jewelry`,
+        `jewelry`,
         {
             params: {
                 limit: 10,
@@ -25,11 +24,11 @@ export const saveJewelry = async ({
 }) => {
     await axios({ 
         method: _id ? 'put' : 'post', 
-        url: `${config.api_url}jewelry/${_id || ''}`, 
+        url: `jewelry/${_id || ''}`, 
         data: { name, category, material, colour, image_url, price: Number(price) },
     });
 };
 
 export const deleteJewelry = async (_id) => {
-    await axios.delete(`${config.api_url}jewelry/${_id}`);
+    await axios.delete(`jewelry/${_id}`);
 };

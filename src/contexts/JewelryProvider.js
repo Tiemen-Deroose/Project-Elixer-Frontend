@@ -1,9 +1,12 @@
 import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import * as jewelryApi from '../api/jewelry'
+import { useSession } from './AuthProvider';
 
 export const JewelryContext = createContext();
 
 export const JewelryProvider = ({ children }) => {
+  const { ready: authReady } = useSession();
+  const [initialLoad, setInitialLoad] = useState(false);
   const [jewelryList, setJewelryList] = useState([]);
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
@@ -53,8 +56,11 @@ export const JewelryProvider = ({ children }) => {
   }, [refreshJewelry]);
 
   useEffect(() => {
+    if (authReady && !initialLoad) {
       refreshJewelry();
-  }, [refreshJewelry]);
+      setInitialLoad(true);
+    }
+  }, [authReady, initialLoad, refreshJewelry]);
 
   const value = useMemo(
     () => ({

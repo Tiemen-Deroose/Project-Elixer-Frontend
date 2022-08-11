@@ -1,9 +1,8 @@
-import axios from 'axios';
-import config from '../config.json';
+import { axios } from '.';
 
 export const getAllArt = async () => {
     const { data } = await axios.get(
-        `${config.api_url}art`,
+        `art`,
         {
             params: {
                 limit: 10,
@@ -25,11 +24,11 @@ export const saveArt = async ({
 }) => {
     await axios({ 
         method: _id ? 'put' : 'post', 
-        url: `${config.api_url}art/${_id || ''}`, 
+        url: `art/${_id || ''}`, 
         data: { title, material, medium, size, image_url, price: Number(price) },
     });
 };
 
 export const deleteArt = async (_id) => {
-    await axios.delete(`${config.api_url}art/${_id}`);
+    await axios.delete(`art/${_id}`);
 };

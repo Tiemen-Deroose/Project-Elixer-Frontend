@@ -1,9 +1,12 @@
 import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
-import * as artApi from '../api/art'
+import * as artApi from '../api/art';
+import { useSession } from './AuthProvider';
 
 export const ArtContext = createContext();
 
 export const ArtProvider = ({ children }) => {
+  const { ready: authReady } = useSession();
+  const [initialLoad, setInitialLoad] = useState(false);
   const [artList, setArtList] = useState([]);
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
@@ -53,8 +56,11 @@ export const ArtProvider = ({ children }) => {
   }, [refreshArt]);
 
   useEffect(() => {
+    if (authReady && !initialLoad) {
       refreshArt();
-  }, [refreshArt]);
+      setInitialLoad(true);
+    }
+  }, [authReady, initialLoad, refreshArt]);
 
   const value = useMemo(
     () => ({
