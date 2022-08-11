@@ -1,24 +1,37 @@
-import { AppBar, Toolbar } from "@mui/material";
-import React from "react";
+import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import { useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useLogout, useSession } from "../contexts/AuthProvider";
 
-function Navbar() {
+export default function Navbar() {
+    const { isAuthed, user } = useSession();
+    const logout = useLogout();
+
+    const handleLogout = useCallback(() => {
+        logout();
+    }, [logout]);
+
     return <>
         <AppBar position='static'>
             <Toolbar className='flex justify-between'>
-                <div className='space-x-8'>
-                    <Link to="/">
-                        Browse
-                    </Link>
-                    <Link to="/art">
-                        Art
-                    </Link>
-                    <Link to="/jewelry">
-                        Jewelry
-                    </Link>
+                <div>
+                    <Link to="/"><Button variant="standard">Browse</Button></Link>
+                    <Link to="/art"><Button variant="standard">Art</Button></Link>
+                    <Link to="/jewelry"><Button variant="standard">Jewelry</Button></Link>
+                </div>
+                <div>
+                    {isAuthed ? (
+                        <Button variant="standard" onClick={handleLogout}>
+                            Sign out
+                        </Button>
+                    ) : (
+                        <>
+                            <Link to="/login"><Button variant="standard">Login</Button></Link>
+                            <Link to="/register"><Button variant="standard">Register</Button></Link>
+                        </>
+                    )}
                 </div>
             </Toolbar>
-        </AppBar>
+        </AppBar >
     </>
-}
-export default Navbar;
+};
