@@ -21,6 +21,11 @@ export const useLogout = () => {
 	return logout;
 };
 
+export const useRegister = () => {
+	const { register } = useAuth();
+	return register;
+  };
+
 const useAuth = () => useContext(AuthContext);
 
 function parseJwt(token) {
@@ -73,7 +78,7 @@ export const AuthProvider = ({ children }) => {
 
 		try {
 			const { token, user } = await usersApi.login(email, password);
-			setSession(token, user);
+			await setSession(token, user);
 			return true;
 		} catch (error) {
 			console.error(error);
@@ -86,6 +91,23 @@ export const AuthProvider = ({ children }) => {
 
 	const logout = useCallback(() => {
 		setSession(null, null);
+	}, [setSession]);
+	
+	const register = useCallback(async (data) => {
+        setLoading(true);
+        setError('');
+
+		try {
+			const { token, user } = await usersApi.register(data);
+			await setSession(token, user);
+			return true;
+		} catch (error) {
+			console.error(error);
+			setError(error);
+			return false;
+		} finally {
+			setLoading(false);
+		}
 	}, [setSession]);
 
 	useEffect(() => {
@@ -100,7 +122,8 @@ export const AuthProvider = ({ children }) => {
 		loading,
 		login,
 		logout,
-	}), [token, user, ready, error, loading, login, logout]);
+		register,
+	}), [token, user, ready, error, loading, login, logout, register]);
 
 	return (
 		<AuthContext.Provider value={value}>
