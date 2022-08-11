@@ -28,4 +28,8 @@ module.exports = {
         rule: 'maxStringLength:50',
         message: 'this field must contain under 50 characters',
     },
+    isEmail: {
+        rule: 'isEmail',
+        message: 'this field must contain a valid email address',
+    }
 };
