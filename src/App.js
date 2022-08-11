@@ -11,6 +11,9 @@ import { ArtProvider } from './contexts/ArtProvider';
 import { JewelryProvider } from './contexts/JewelryProvider';
 import ArtFormPage from './pages/ArtFormPage';
 import JewelryFormPage from './pages/JewelryFormPage';
+import { AuthProvider } from './contexts/AuthProvider';
+import LoginPage from './pages/LoginPage';
+import { RequireAuth } from './components/RequireAuth';
 
 const theme = createTheme({
   palette: {
@@ -29,21 +32,24 @@ function App() {
   return <>
     <CssBaseline />
     <ThemeProvider theme={theme}>
+      <AuthProvider>
       <Navbar />
-      <ArtProvider>
-        <JewelryProvider>
-        <Routes>
-          <Route exact path='/' element={<Browse />} />
-          <Route exact path='/art' element={<ArtPage />} />
-          <Route exact path='/art/add' element={<ArtFormPage />} />
-          <Route exact path='/jewelry' element={<JewelryPage />} />
-          <Route exact path='/jewelry/add' element={<JewelryFormPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        </JewelryProvider>
-      </ArtProvider>
+        <ArtProvider>
+          <JewelryProvider>
+          <Routes>
+            <Route exact path='/login' element={<LoginPage />} />
+            <Route exact path='/' element={<RequireAuth><Browse /></RequireAuth>} />
+            <Route exact path='/art' element={<RequireAuth><ArtPage /></RequireAuth>} />
+            <Route exact path='/art/add' element={<RequireAuth><ArtFormPage /></RequireAuth>} />
+            <Route exact path='/jewelry' element={<RequireAuth><JewelryPage /></RequireAuth>} />
+            <Route exact path='/jewelry/add' element={<RequireAuth><JewelryFormPage /></RequireAuth>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          </JewelryProvider>
+        </ArtProvider>
+      </AuthProvider>
     </ThemeProvider>
-    </>
+  </>
 }
 
 export default App;
