@@ -1,5 +1,7 @@
-import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
-import * as jewelryApi from '../api/jewelry'
+import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
+
+import * as jewelryApi from '../api/jewelry';
+
 import { useSession } from './AuthProvider';
 
 export const JewelryContext = createContext();
@@ -10,7 +12,7 @@ export const JewelryProvider = ({ children }) => {
   const [jewelryList, setJewelryList] = useState([]);
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
-  
+
   const refreshJewelry = useCallback(async () => {
     setError();
     setLoading(true);
@@ -19,12 +21,12 @@ export const JewelryProvider = ({ children }) => {
       const data = await jewelryApi.getAllJewelry();
       setJewelryList(data.data);
     } catch (error) {
-      setError(error)
-    } finally{
+      setError(error);
+    } finally {
       setLoading(false);
     }
   }, []);
-  
+
   const createOrUpdateJewelry = useCallback(async ({ _id, name, category, material, colour, image_url, price }) => {
     setError();
     setLoading(true);
@@ -76,7 +78,7 @@ export const JewelryProvider = ({ children }) => {
       loading,
       createOrUpdateJewelry,
       deleteJewelry,
-    ]
+    ],
   );
 
   return (

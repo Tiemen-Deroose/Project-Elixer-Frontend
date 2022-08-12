@@ -1,5 +1,7 @@
-import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
+import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
+
 import * as artApi from '../api/art';
+
 import { useSession } from './AuthProvider';
 
 export const ArtContext = createContext();
@@ -19,13 +21,13 @@ export const ArtProvider = ({ children }) => {
       const data = await artApi.getAllArt();
       setArtList(data.data);
     } catch (error) {
-      setError(error)
-    } finally{
+      setError(error);
+    } finally {
       setLoading(false);
     }
   }, []);
 
-  const createOrUpdateArt = useCallback(async ({ _id, title, material, medium, size, image_url, price }) => {
+  const createOrUpdateArt = useCallback(async ({ title, material, medium, size, image_url, price }) => {
     setError();
     setLoading(true);
 
@@ -76,7 +78,7 @@ export const ArtProvider = ({ children }) => {
       loading,
       createOrUpdateArt,
       deleteArt,
-    ]
+    ],
   );
 
   return (

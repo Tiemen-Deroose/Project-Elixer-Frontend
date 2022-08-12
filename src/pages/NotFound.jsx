@@ -1,11 +1,12 @@
-import { Typography } from '@mui/material';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 export default function NotFound() {
-    const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-    return <div className='m-4 space-y-2'>
-        <Typography variant='h3'>Page not found</Typography>
-        <Typography>Could not find a page at url: {pathname}</Typography>
-    </div>
-};
+  return <div className='m-4 space-y-2'>
+    <Typography variant='h3'>Page not found</Typography>
+    <Typography>Could not find a page at url: {pathname}</Typography>
+  </div>;
+}
