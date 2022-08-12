@@ -24,4 +24,12 @@ export const register = async ({
 export const getUserById = async (id) => {
 	const { data } = await axios.get(`users/${id}`);
 	return data;
-  }
+};
+
+export const favourite = async ({userId, itemId, isFavourited}) => {
+	await axios({ 
+        method: isFavourited ? 'delete' : 'put', 
+        url: `users/favourite/${userId || ''}`, 
+        data: { itemId },
+    });
+};

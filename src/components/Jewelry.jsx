@@ -8,9 +8,12 @@ import { InputAdornment, IconButton, Card, CardActionArea, CardActions, CardCont
 import { memo, useCallback, useState, useContext } from 'react';
 import FavouriteButton from "./FavouriteButton";
 import { JewelryContext } from '../contexts/JewelryProvider';
+import { useSession, useFavourite } from '../contexts/AuthProvider';
 
 export default memo(function Jewelry({ _id, name, category, material, colour, image_url, price, isFavourited, onFavourite }) {
-    const { favouriteJewelry, createOrUpdateJewelry, deleteJewelry } = useContext(JewelryContext);
+    const { createOrUpdateJewelry, deleteJewelry } = useContext(JewelryContext);
+    const { hasFavourite, hasRole } = useSession();
+    const favourite = useFavourite();
 
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const [editedName, setEditedName] = useState(name);
@@ -21,8 +24,8 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
     const [editedPrice, setEditedPrice] = useState(price);
 
     const handleFavourite = useCallback(() => {
-        favouriteJewelry(_id);
-    }, [favouriteJewelry, _id]);
+        favourite(_id);
+    }, [favourite, _id]);
 
     const handleDelete = useCallback(() => {
         deleteJewelry(_id);
@@ -83,10 +86,14 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
                     </List>
                 </CardContent>
                 <CardActions className='flex justify-between'>
-                    <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} data-cy='jewelry_favourite_button' />
+                    <FavouriteButton initialState={hasFavourite(_id)} onFavourite={() => handleFavourite()} data-cy='jewelry_favourite_button' />
                     <div>
-                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='jewelry_edit_button' /></IconButton>
-                        <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='jewelry_delete_button' /></IconButton>
+                        {
+                            hasRole('admin') ? <>
+                                <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='art_edit_button' /></IconButton>
+                                <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='art_delete_button' /></IconButton>
+                            </> : <></>
+                        }
                     </div>
                 </CardActions>
             </Card>

@@ -7,8 +7,8 @@ const JWT_TOKEN_KEY = config.token_key;
 const AuthContext = createContext();
 
 export const useSession = () => {
-	const { token, user, ready, loading, error, hasRole } = useAuth();
-	return { token, user, ready, error, loading, isAuthed: Boolean(token), hasRole };
+	const { token, user, ready, loading, error, hasRole, hasFavourite } = useAuth();
+	return { token, user, ready, error, loading, isAuthed: Boolean(token), hasRole , hasFavourite};
 };
 
 export const useLogin = () => {
@@ -24,7 +24,12 @@ export const useLogout = () => {
 export const useRegister = () => {
 	const { register } = useAuth();
 	return register;
-  };
+};
+
+export const useFavourite = () => {
+	const { favourite } = useAuth();
+	return favourite;
+};
 
 const useAuth = () => useContext(AuthContext);
 
@@ -110,6 +115,38 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, [setSession]);
 
+	const hasFavourite = useCallback((itemId) => {
+		if (!user) return false;
+		return user.favourites.includes(itemId);
+	}, [user]);
+
+	const favourite = useCallback(async (itemId) => {
+		setLoading(true);
+        setError('');
+		
+		try {
+			if (!user) return false;
+			await usersApi.favourite({
+				userId: user._id,
+				itemId,
+				isFavourited: hasFavourite(itemId),
+			});
+			await setSession(token);
+			return true;
+		} catch (error) {
+			console.error(error);
+			setError(error);
+			return false;
+		} finally {
+			setLoading(false);
+		}
+	}, [user, token, setSession, hasFavourite]);
+
+	const hasRole = useCallback((role) => {
+		if (!user) return false;
+		return user.roles.includes(role);
+	}, [user]);
+
 	useEffect(() => {
 		setSession(token);
 	}, [token, setSession]);
@@ -123,7 +160,10 @@ export const AuthProvider = ({ children }) => {
 		login,
 		logout,
 		register,
-	}), [token, user, ready, error, loading, login, logout, register]);
+		favourite,
+		hasFavourite,
+		hasRole,
+	}), [token, user, ready, error, loading, login, logout, register, favourite, hasFavourite, hasRole]);
 
 	return (
 		<AuthContext.Provider value={value}>

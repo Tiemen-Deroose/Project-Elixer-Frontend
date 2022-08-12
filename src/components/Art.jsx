@@ -8,9 +8,12 @@ import { InputAdornment, IconButton, Card, CardActionArea, CardActions, CardCont
 import { memo, useCallback, useState, useContext } from 'react';
 import FavouriteButton from "./FavouriteButton";
 import { ArtContext } from '../contexts/ArtProvider';
+import { useSession, useFavourite } from '../contexts/AuthProvider';
 
 export default memo(function Art({ _id, title, material, medium, size, image_url, price }) {
-    const { favouriteArt, createOrUpdateArt, deleteArt } = useContext(ArtContext);
+    const { createOrUpdateArt, deleteArt } = useContext(ArtContext);
+    const { hasFavourite, hasRole } = useSession();
+    const favourite = useFavourite();
 
     const [openEditDialog, setOpenEditDialog] = useState(false);
     const [editedTitle, setEditedTitle] = useState(title);
@@ -21,8 +24,8 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
     const [editedPrice, setEditedPrice] = useState(price);
 
     const handleFavourite = useCallback(() => {
-        favouriteArt(_id);
-    }, [favouriteArt, _id]);
+        favourite(_id);
+    }, [favourite, _id]);
 
     const handleDelete = useCallback(() => {
         deleteArt(_id);
@@ -83,10 +86,14 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
                     </List>
                 </CardContent>
                 <CardActions className='flex justify-between'>
-                    <FavouriteButton initialState={false} onFavourite={() => handleFavourite()} data-cy='art_favourite_button' />
+                    <FavouriteButton initialState={hasFavourite(_id)} onFavourite={handleFavourite} data-cy='art_favourite_button' />
                     <div>
-                        <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='art_edit_button' /></IconButton>
-                        <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='art_delete_button' /></IconButton>
+                        {
+                            hasRole('admin') ? <>
+                                <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='art_edit_button' /></IconButton>
+                                <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='art_delete_button' /></IconButton>
+                            </> : <></>
+                        }
                     </div>
                 </CardActions>
             </Card>

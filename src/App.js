@@ -43,9 +43,9 @@ function App() {
             <Route exact path='/register' element={<RegisterPage />} />
             <Route exact path='/' element={<RequireAuth><Browse /></RequireAuth>} />
             <Route exact path='/art' element={<RequireAuth><ArtPage /></RequireAuth>} />
-            <Route exact path='/art/add' element={<RequireAuth><ArtFormPage /></RequireAuth>} />
+            <Route exact path='/art/add' element={<RequireAuth role='admin'><ArtFormPage /></RequireAuth>} />
             <Route exact path='/jewelry' element={<RequireAuth><JewelryPage /></RequireAuth>} />
-            <Route exact path='/jewelry/add' element={<RequireAuth><JewelryFormPage /></RequireAuth>} />
+            <Route exact path='/jewelry/add' element={<RequireAuth role='admin'><JewelryFormPage /></RequireAuth>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           </JewelryProvider>

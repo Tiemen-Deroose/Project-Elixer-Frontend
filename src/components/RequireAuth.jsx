@@ -1,13 +1,16 @@
+import { useMemo } from "react";
 import { Navigate, useLocation } from "react-router";
 import { useSession } from "../contexts/AuthProvider";
 
-export const RequireAuth = ({ children }) => {
-    const { isAuthed } = useSession();
+export const RequireAuth = ({ children, role }) => {
+    const { isAuthed, hasRole } = useSession();
     const { pathname } = useLocation();
 
-    if (isAuthed)
-        return children;
+    const canShowRoute = useMemo(() => {
+        if (!role) return isAuthed;
+        return isAuthed && hasRole(role);
+    }, [isAuthed, role, hasRole]);
 
-    return <Navigate to="/login" state={{ from: pathname }} replace />;
-
+    return canShowRoute ? children
+        : <Navigate to="/login" state={{ from: pathname }} replace />
 };
