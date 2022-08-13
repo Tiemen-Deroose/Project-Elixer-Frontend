@@ -97,7 +97,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
           </List>
         </CardContent>
         <CardActions className='flex justify-between'>
-          <FavouriteButton initialState={hasFavourite(_id)} onFavourite={() => handleFavourite()} data-cy='jewelry_favourite_button' />
+          <FavouriteButton initialState={hasFavourite(_id)} onFavourite={() => handleFavourite()} />
           <div>
             {
               hasRole('admin') ? <>

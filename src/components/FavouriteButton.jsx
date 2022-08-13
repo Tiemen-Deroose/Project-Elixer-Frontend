@@ -3,7 +3,7 @@ import { IconButton } from '@mui/material';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 
 const chooseEmoji = (state) => {
-  return state ? <Favorite fontSize='large' /> : <FavoriteBorder fontSize='large' />;
+  return state ? <Favorite fontSize='large' data-cy='unfavourite_icon' /> : <FavoriteBorder fontSize='large' data-cy='favourite_icon' />;
 };
 
 export default function FavouriteButton({ initialState, onFavourite }) {
@@ -23,7 +23,7 @@ export default function FavouriteButton({ initialState, onFavourite }) {
     }
   }, [disableButton, disabled, onFavourite, state]);
 
-  return <IconButton color='error' onClick={toggleState}>
+  return <IconButton color='error' onClick={toggleState} data-cy='favourite_button'>
     {chooseEmoji(state)}
   </IconButton>;
 }

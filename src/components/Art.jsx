@@ -97,7 +97,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
           </List>
         </CardContent>
         <CardActions className='flex justify-between'>
-          <FavouriteButton initialState={hasFavourite(_id)} onFavourite={handleFavourite} data-cy='art_favourite_button' />
+          <FavouriteButton initialState={hasFavourite(_id)} onFavourite={handleFavourite} />
           <div>
             {
               hasRole('admin') ? <>
