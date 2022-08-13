@@ -27,12 +27,12 @@ export const ArtProvider = ({ children }) => {
     }
   }, []);
 
-  const createOrUpdateArt = useCallback(async ({ title, material, medium, size, image_url, price }) => {
+  const createOrUpdateArt = useCallback(async ({ _id, title, material, medium, size, image_url, price }) => {
     setError();
     setLoading(true);
 
     try {
-      await artApi.saveArt({ title, material, medium, size, image_url, price });
+      await artApi.saveArt({ _id, title, material, medium, size, image_url, price });
       await refreshArt();
     } catch (error) {
       console.error(error);
