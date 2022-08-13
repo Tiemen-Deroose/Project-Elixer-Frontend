@@ -117,7 +117,8 @@ export const AuthProvider = ({ children }) => {
   }, [setSession]);
 
   const hasFavourite = useCallback((itemId) => {
-    if (!user) return false;
+    if (!user)
+      return false;
     return user.favourites.includes(itemId);
   }, [user]);
 
@@ -144,7 +145,8 @@ export const AuthProvider = ({ children }) => {
   }, [user, token, setSession, hasFavourite]);
 
   const hasRole = useCallback((role) => {
-    if (!user) return false;
+    if (!user)
+      return false;
     return user.roles.includes(role);
   }, [user]);
 

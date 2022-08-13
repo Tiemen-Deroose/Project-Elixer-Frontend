@@ -101,8 +101,8 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
           <div>
             {
               hasRole('admin') ? <>
-                <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='art_edit_button' /></IconButton>
-                <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='art_delete_button' /></IconButton>
+                <IconButton color='info' onClick={handleClickEditButton}><EditIcon fontSize='large' data-cy='jewelry_edit_button' /></IconButton>
+                <IconButton color='error' onClick={handleDelete}><RemoveCircleIcon fontSize='large' data-cy='jewelry_delete_button' /></IconButton>
               </> : <></>
             }
           </div>

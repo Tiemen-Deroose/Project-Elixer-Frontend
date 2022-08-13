@@ -17,9 +17,9 @@ export default function Navbar() {
     <AppBar position='static'>
       <Toolbar className='flex justify-between'>
         <div>
-          <Link to="/"><Button variant="standard">Browse</Button></Link>
-          <Link to="/art"><Button variant="standard">Art</Button></Link>
-          <Link to="/jewelry"><Button variant="standard">Jewelry</Button></Link>
+          <Link to="/"><Button variant="standard" data-cy='nav_browse'>Browse</Button></Link>
+          <Link to="/art"><Button variant="standard" data-cy='nav_art'>Art</Button></Link>
+          <Link to="/jewelry"><Button variant="standard" data-cy='nav_jewelry'>Jewelry</Button></Link>
         </div>
         <div className='mr-4'>
           {isAuthed ? (
