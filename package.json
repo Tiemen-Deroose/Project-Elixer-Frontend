@@ -20,10 +20,17 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
+  "devDependencies": {
+    "autoprefixer": "^9",
+    "cypress": "^10.4.0",
+    "eslint-plugin-react": "^7.30.1",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "cypress open",
     "eject": "react-scripts eject",
     "lint": "npx eslint . --fix"
   },
@@ -44,13 +51,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^9",
-    "cypress": "^10.4.0",
-    "eslint": "^8.21.0",
-    "eslint-plugin-react": "^7.30.1",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
