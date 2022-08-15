@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@emotion/react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, useLocation, Route, Routes } from 'react-router-dom';
 import { createTheme, CssBaseline } from '@mui/material';
 
 import { ArtProvider } from './contexts/ArtProvider';
@@ -15,7 +15,6 @@ import ArtFormPage from './pages/ArtFormPage';
 import JewelryFormPage from './pages/JewelryFormPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import NotFound from './pages/NotFound';
 
 const theme = createTheme({
   palette: {
@@ -46,7 +45,7 @@ function App() {
               <Route exact path='/art/add' element={<RequireAuth role='admin'><ArtFormPage /></RequireAuth>} />
               <Route exact path='/jewelry' element={<RequireAuth><JewelryPage /></RequireAuth>} />
               <Route exact path='/jewelry/add' element={<RequireAuth role='admin'><JewelryFormPage /></RequireAuth>} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<Navigate to="/login" state={{ from: useLocation() }} replace />} />
             </Routes>
           </JewelryProvider>
         </ArtProvider>
