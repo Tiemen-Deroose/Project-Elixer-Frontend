@@ -2,7 +2,7 @@
   "name": "project-elixer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tiemenderoose.github.io/frontendweb-thomas-2122-tiemenderoose/",
+  "homepage": "https://hogent-web.github.io/frontendweb-thomas-2122-tiemenderoose/",
   "dependencies": {
     "@craco/craco": "^6.4.0",
     "@emotion/react": "^11.10.0",
