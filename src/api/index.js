@@ -4,6 +4,9 @@ import config from '../config.json';
 
 export const axios = axiosRoot.create({
   baseURL: config.api_url,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem(config.token_key)}`,
+  },
 });
 
 export const setAuthToken = (token) => {
