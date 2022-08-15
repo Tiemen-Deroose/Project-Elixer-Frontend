@@ -34,15 +34,24 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
   }, [deleteArt, _id]);
 
   const handleEdit = useCallback(() => {
-    createOrUpdateArt({
-      _id,
-      title: editedTitle,
-      material: editedMaterial,
-      medium: editedMedium,
-      size: editedSize,
-      image_url: editedImageUrl,
-      price: editedPrice,
-    });
+    if (
+      title != editedTitle
+      || material != editedMaterial
+      || medium != editedMedium
+      || size != editedSize
+      || image_url != editedImageUrl
+      || price != editedPrice
+    ) {
+      createOrUpdateArt({
+        _id,
+        title: editedTitle,
+        material: editedMaterial,
+        medium: editedMedium,
+        size: editedSize,
+        image_url: editedImageUrl,
+        price: editedPrice,
+      });
+    }
     setOpenEditDialog(false);
   }, [
     createOrUpdateArt,
@@ -55,9 +64,13 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
     editedPrice,
   ]);
 
-  const handleClickEditButton = () => {
+  const handleClickEditButton = useCallback(() => {
     setOpenEditDialog(true);
-  };
+  }, []);
+
+  const handleCloseDialog = useCallback(() => {
+    setOpenEditDialog(false);
+  }, []);
 
   return (
     <>
@@ -109,7 +122,7 @@ export default memo(function Art({ _id, title, material, medium, size, image_url
         </CardActions>
       </Card>
 
-      <Dialog open={openEditDialog} onClose={handleEdit} data-cy='art_edit_dialog' >
+      <Dialog open={openEditDialog} onClose={handleCloseDialog} data-cy='art_edit_dialog' >
         <DialogTitle>Edit Art</DialogTitle>
         <DialogContent className='space-y-4'>
           <TextField

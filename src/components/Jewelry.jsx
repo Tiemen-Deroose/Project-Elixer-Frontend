@@ -34,15 +34,24 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
   }, [deleteJewelry, _id]);
 
   const handleEdit = useCallback(() => {
-    createOrUpdateJewelry({
-      _id,
-      name: editedName,
-      category: editedCategory,
-      material: editedMaterial,
-      colour: editedColour,
-      image_url: editedImageUrl,
-      price: editedPrice,
-    });
+    if (
+      name != editedName
+      || category != editedCategory
+      || material != editedMaterial
+      || colour != editedColour
+      || image_url != editedImageUrl
+      || price != editedPrice
+    ) {
+      createOrUpdateJewelry({
+        _id,
+        name: editedName,
+        category: editedCategory,
+        material: editedMaterial,
+        colour: editedColour,
+        image_url: editedImageUrl,
+        price: editedPrice,
+      });
+    }
     setOpenEditDialog(false);
   }, [
     createOrUpdateJewelry,
@@ -55,9 +64,13 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
     editedPrice,
   ]);
 
-  const handleClickEditButton = () => {
+  const handleClickEditButton = useCallback(() => {
     setOpenEditDialog(true);
-  };
+  }, []);
+
+  const handleCloseDialog = useCallback(() => {
+    setOpenEditDialog(false);
+  }, []);
 
   return (
     <>
@@ -109,7 +122,7 @@ export default memo(function Jewelry({ _id, name, category, material, colour, im
         </CardActions>
       </Card>
 
-      <Dialog open={openEditDialog} onClose={handleEdit} data-cy='jewelry_edit_dialog'>
+      <Dialog open={openEditDialog} onClose={handleCloseDialog} data-cy='jewelry_edit_dialog'>
         <DialogTitle>Edit Jewelry</DialogTitle>
         <DialogContent className='space-y-4'>
           <TextField
