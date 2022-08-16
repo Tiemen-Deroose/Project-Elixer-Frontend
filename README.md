@@ -1,6 +1,49 @@
-# Getting Started with Create React App
+# Elixer front-end
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the front-end for my elixer project, made with React, Material UI and TailwindCSS, along with a number of other packages which you can find in package.json at the root folder.
+
+## How to view the website
+
+### `Online`
+
+If you would like to view the online version of the website hosted on github, you can click on the following link; https://hogent-web.github.io/frontendweb-thomas-2122-tiemenderoose/
+
+It should be noted however that, github pages currently does not to play nice with react-router (the repository name seems to be omitted); Manually refreshing will cause the browser to try to find a page like 'https://hogent-web.github.io/login', which does not exist.
+
+### `Local`
+
+If instead you'd like to run this project locally with working api calls, you'll need to have the back-end running locally, which you can find here; https://github.com/HOGENT-Web/webservices-thomas-2122-tiemenderoose.
+
+Make sure to first run `yarn install` in order to install the dependencies.  
+Afterwards, you can start the website with `yarn start`.
+
+## Pages Description
+
+### `Login & Register`
+
+In order to log in, one can simply make a new account on the `Register` page with a fake email. You can then use this account to log in and view the site as a regular user.
+
+If running this locally, you can also use the following preset accounts, assuming they're present in the local database;
+
+```
+user1:  
+username: user1@domain.com  
+password: pass123
+
+user2 (admin):  
+username: user2@domain.com  
+password: pass123
+```
+
+### `Browse`
+
+On login, you'll be lead to the first main page. This is where you can view and search for both art & jewelry. You can search by name or property of the item you're looking for. All users can favourite any displayed item. Admins can also edit and delete these items.
+
+### `Art & Jewelry`
+
+The Art & Jewelry pages are very similar, you can interact with the items all the same as you could on the browse page. If you are an admin, you can also click to add a new art/jewelry from here. Doing so will redirect you to the art/jewelry creation forms which have input validation.
+
+## Additional React Documentation
 
 ## Available Scripts
 
@@ -16,8 +59,7 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches cypress, go to E2E testing to view & run the tests
 
 ### `yarn build`
 
