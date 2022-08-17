@@ -4,8 +4,7 @@ import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { Backdrop, Button, Card, CardContent, CircularProgress, Typography } from '@mui/material';
 
 import { useLogin, useSession } from '../contexts/AuthProvider';
-
-import { required, lengthMax255, isEmail } from './form/ValidationRules';
+import { required, lengthMax255, isEmail } from '../config/ValidationRules';
 
 export default function Login() {
   const navigate = useNavigate();

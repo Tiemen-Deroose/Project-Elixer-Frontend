@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Button, Card, InputAdornment, Typography } from '@mui/material';
 
 import { JewelryContext } from '../contexts/JewelryProvider';
-
-import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules';
+import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from '../config/ValidationRules';
 
 export default function AddJewelryForm() {
   const navigate = useNavigate();
@@ -17,10 +16,10 @@ export default function AddJewelryForm() {
   const [image_url, setImageUrl] = useState('');
   const [price, setPrice] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     createOrUpdateJewelry({ name, category, material, colour, image_url, price });
     navigate('/jewelry');
-  };
+  }, [name, category, material, colour, image_url, price, createOrUpdateJewelry]);
 
   return (
     <Card>

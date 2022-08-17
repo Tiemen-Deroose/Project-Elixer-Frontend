@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Button, Card, InputAdornment, Typography } from '@mui/material';
 
 import { ArtContext } from '../contexts/ArtProvider';
-
-import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from './form/ValidationRules';
+import { required, float, maxDecimals2, positive, url, lengthMax50, lengthMax255 } from '../config/ValidationRules';
 
 export default function AddArtForm() {
   const navigate = useNavigate();
@@ -17,10 +16,10 @@ export default function AddArtForm() {
   const [image_url, setImageUrl] = useState('');
   const [price, setPrice] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     createOrUpdateArt({ title, material, medium, size, image_url, price });
     navigate('/art');
-  };
+  }, [title, material, medium, size, image_url, price, createOrUpdateArt]);
 
   return (
     <Card>
