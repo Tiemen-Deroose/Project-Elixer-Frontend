@@ -8,7 +8,7 @@ describe('art test', () => {
     cy.get('[data-cy=create_new_button]').click();
 
     cy.get('[data-cy=art_title_input]').type('Painting');
-    cy.get('[data-cy=art_url_input]').type('http://localhost:3000/images/art/sunlight.jpg');
+    cy.get('[data-cy=art_url_input]').type('http://localhost:3000/frontendweb-thomas-2122-tiemenderoose/images/art/sunlight.jpg');
     cy.get('[data-cy=art_price_input]').type('209.99');
     cy.get('[data-cy=art_material_input]').type('canvas');
     cy.get('[data-cy=art_medium_input]').type('paint');
@@ -36,7 +36,7 @@ describe('art test', () => {
     cy.get('[data-cy=art_edit_dialog]').should('be.visible');
 
     cy.get('[data-cy=art_edit_title_input]').clear().type('editedTitle');
-    cy.get('[data-cy=art_edit_url_input]').clear().type('http://localhost:3000/images/art/autumn_tree.jpg');
+    cy.get('[data-cy=art_edit_url_input]').clear().type('http://localhost:3000/frontendweb-thomas-2122-tiemenderoose/images/art/autumn_tree.jpg');
     cy.get('[data-cy=art_edit_price_input]').clear().type('99.99');
     cy.get('[data-cy=art_edit_material_input]').clear().type('editedMaterial');
     cy.get('[data-cy=art_edit_medium_input]').clear().type('editedMedium');

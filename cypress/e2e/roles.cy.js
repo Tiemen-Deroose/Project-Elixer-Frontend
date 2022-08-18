@@ -29,9 +29,9 @@ describe('jewelry test', () => {
     cy.get('[data-cy=nav_jewelry]').click();
     cy.get('[data-cy=create_new_button]').should('not.exist');
 
-    cy.visit('http://localhost:3000/art/add');
+    cy.visit('http://localhost:3000/frontendweb-thomas-2122-tiemenderoose/art/add');
     cy.url().should('not.include', '/art/add');
-    cy.visit('http://localhost:3000/jewelry/add');
+    cy.visit('http://localhost:3000/frontendweb-thomas-2122-tiemenderoose/jewelry/add');
     cy.url().should('not.include', '/jewelry/add');
   });
 });

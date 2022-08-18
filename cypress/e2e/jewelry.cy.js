@@ -8,7 +8,7 @@ describe('jewelry test', () => {
     cy.get('[data-cy=create_new_button]').click();
 
     cy.get('[data-cy=jewelry_name_input]').type('Silver bracelet');
-    cy.get('[data-cy=jewelry_url_input]').type('http://localhost:3000/images/jewelry/skeletonized_petals_bracelet.jpg');
+    cy.get('[data-cy=jewelry_url_input]').type('http://localhost:3000/frontendweb-thomas-2122-tiemenderoose/images/jewelry/skeletonized_petals_bracelet.jpg');
     cy.get('[data-cy=jewelry_price_input]').type('109.99');
     cy.get('[data-cy=jewelry_category_input]').type('bracelet');
     cy.get('[data-cy=jewelry_material_input]').type('sterling silver');
@@ -36,7 +36,7 @@ describe('jewelry test', () => {
     cy.get('[data-cy=jewelry_edit_dialog]').should('be.visible');
 
     cy.get('[data-cy=jewelry_edit_name_input]').clear().type('editedName');
-    cy.get('[data-cy=jewelry_edit_url_input]').clear().type('http://localhost:3000/images/jewelry/colour_changing_pendant.jpg');
+    cy.get('[data-cy=jewelry_edit_url_input]').clear().type('http://localhost:3000/frontendweb-thomas-2122-tiemenderoose/images/jewelry/colour_changing_pendant.jpg');
     cy.get('[data-cy=jewelry_edit_price_input]').clear().type('159.99');
     cy.get('[data-cy=jewelry_edit_category_input]').clear().type('editedCategory');
     cy.get('[data-cy=jewelry_edit_material_input]').clear().type('editedMaterial');
